@@ -1,12 +1,12 @@
 const express = require('express');
-require('dotenv').config();
+require('dotenv').config({path:'./src/.env'});
 
 const routes = require('./routes');
 
 const mongoose = require('mongoose');
 const app = express();
 
-mongoose.connect("mongodb+srv://ecommerce:vanhelsing123@cluster0-hyyla.mongodb.net/peper?retryWrites=true&w=majority",
+mongoose.connect(process.env.DATABASE,
     {useNewUrlParser:true, useCreateIndex:true,   useUnifiedTopology: true }
     ).then(()=>console.log("DB CONNECTED"))
 
