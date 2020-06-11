@@ -1,5 +1,6 @@
 const express = require('express');
 require('dotenv').config({path:'./src/.env'});
+const cookieParser = require("cookie-parser")
 
 const routes = require('./routes');
 
@@ -12,6 +13,7 @@ mongoose.connect(process.env.DATABASE,
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(cookieParser());
 
 app.use(routes);
 
