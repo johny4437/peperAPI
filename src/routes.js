@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const { singup, singin, userById, requireSingin} = require('./controller/userController');
-const {createPrice, listPrice } = require('./controller/priceController');
+const {createPrice, getLastPrice, listPrice} = require('./controller/priceController');
 
 
 
@@ -15,6 +15,9 @@ router.post('/user/singup', singup);
 router.post('/user/singin', singin);
 //CRIAR UM PREÇO
 router.post('/price/create', requireSingin,createPrice);
+
+//Pegar ultimo preço
+router.get('/price/lastprice', getLastPrice);
 
 
 module.exports = router;
