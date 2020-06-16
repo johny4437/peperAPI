@@ -2,6 +2,8 @@ const User = require('../models/UserSchema');
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
 const expressJwt = require('express-jwt');
+const expressIp = require('express-ip');
+const { response } = require('express');
 
 
 exports.singup = async (req,res) =>{
@@ -12,6 +14,8 @@ const user = new User(req.body);
         if(err){
              return res.status(400).json('Erro ao salvar');
         }
+        user.salt = undefined;
+        user.hashed_password = undefined;
 
         res.json({ user });
     })
@@ -42,14 +46,10 @@ exports.requireSingin = expressJwt({
     secret: process.env.JWT_SECRET,
     userProperty:"auth"
 });
-// exports.userById = (request, response, next, id) =>{
-//     User.findById(id).exec((err, user)=>{
-//         if(err || !user){
-//             return response.status(400).json({error: "User not found"})
-//         }
-//         request.profile = user;
-//         next();
-//     })
-// };
+
+exports.singout = (req, res) =>{
+    res.clearCookie('t');
+    return res.json("Deslogado com sucesso");
+}
 
 
