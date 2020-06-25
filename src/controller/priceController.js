@@ -7,7 +7,7 @@ exports.createPrice = (req, res)=>{
         if(err){
             res.status(400).json("Error to save the price");
         }
-        res.json({ price });
+        res.json( price  );
     })
 };
 //Listar todos os preços

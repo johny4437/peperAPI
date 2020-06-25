@@ -9,13 +9,16 @@ const routes = require('./routes');
 const mongoose = require('mongoose');
 const app = express();
 
+app.use(cors());
+
 mongoose.connect(process.env.DATABASE,
     {useNewUrlParser:true, useCreateIndex:true,   useUnifiedTopology: true }
     ).then(()=>console.log("DB CONNECTED"))
 
-app.use(cors());
+
 app.use(morgan("dev"));
 app.use(express.json());
+
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(expressValidator());
